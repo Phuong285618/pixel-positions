@@ -23,7 +23,7 @@
                     </div>
 
                     @auth
-                        @can('update', $job)
+                        @can('edit', $job)
                             <div class="flex items-center gap-x-3 shrink-0">
                                 <a href="/jobs/{{ $job->id }}/edit"
                                    class="px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-sm font-bold transition-colors duration-200">

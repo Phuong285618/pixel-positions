@@ -26,14 +26,14 @@ class SalaryController extends Controller
             ['title' => 'Full Stack Developer',     'avg' => '$110,000', 'low' => '$70,000',  'high' => '$150,000'],
             ['title' => 'Backend Engineer',         'avg' => '$118,000', 'low' => '$78,000',  'high' => '$158,000'],
             ['title' => 'Frontend Engineer',        'avg' => '$105,000', 'low' => '$68,000',  'high' => '$140,000'],
-            ['title' => 'Machine Learning Engineer','avg' => '$145,000', 'low' => '$100,000', 'high' => '$190,000'],
+            ['title' => 'Machine Learning Engineer', 'avg' => '$145,000', 'low' => '$100,000', 'high' => '$190,000'],
             ['title' => 'Engineering Manager',      'avg' => '$160,000', 'low' => '$120,000', 'high' => '$210,000'],
         ];
 
         return view('salaries.index', [
             'salaryRanges' => $salaryRanges,
             'topJobTitles' => $topJobTitles,
-            'tags'         => Tag::all(),
+            'tags' => Tag::all(),
         ]);
     }
 }

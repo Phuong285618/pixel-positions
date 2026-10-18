@@ -7,7 +7,6 @@ use App\Models\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Validation\Rule;
 
 class JobController extends Controller
@@ -30,9 +29,9 @@ class JobController extends Controller
             ->withQueryString();
 
         return view('jobs.index', [
-            'jobs'         => $jobs,
+            'jobs' => $jobs,
             'featuredJobs' => $featured,
-            'tags'         => Tag::all(),
+            'tags' => Tag::all(),
         ]);
     }
 
@@ -50,12 +49,12 @@ class JobController extends Controller
     public function store(Request $request)
     {
         $attributes = $request->validate([
-            'title'    => ['required'],
-            'salary'   => ['required'],
+            'title' => ['required'],
+            'salary' => ['required'],
             'location' => ['required'],
             'schedule' => ['required', Rule::in(['Part Time', 'Full Time'])],
-            'url'      => ['required', 'active_url'],
-            'tags'     => ['nullable'],
+            'url' => ['required', 'active_url'],
+            'tags' => ['nullable'],
         ]);
 
         $attributes['featured'] = $request->has('featured');
@@ -84,8 +83,6 @@ class JobController extends Controller
      */
     public function edit(Job $job)
     {
-        Gate::authorize('update', $job);
-
         return view('jobs.edit', ['job' => $job->load('tags')]);
     }
 
@@ -94,15 +91,13 @@ class JobController extends Controller
      */
     public function update(Request $request, Job $job)
     {
-        Gate::authorize('update', $job);
-
         $attributes = $request->validate([
-            'title'    => ['required'],
-            'salary'   => ['required'],
+            'title' => ['required'],
+            'salary' => ['required'],
             'location' => ['required'],
             'schedule' => ['required', Rule::in(['Part Time', 'Full Time'])],
-            'url'      => ['required', 'active_url'],
-            'tags'     => ['nullable'],
+            'url' => ['required', 'active_url'],
+            'tags' => ['nullable'],
         ]);
 
         $attributes['featured'] = $request->has('featured');
@@ -117,7 +112,7 @@ class JobController extends Controller
             }
         }
 
-        return redirect('/jobs/' . $job->id);
+        return redirect('/jobs/'.$job->id);
     }
 
     /**
@@ -125,8 +120,6 @@ class JobController extends Controller
      */
     public function destroy(Job $job)
     {
-        Gate::authorize('delete', $job);
-
         $job->tags()->detach();
         $job->delete();
 
